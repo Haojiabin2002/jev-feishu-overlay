@@ -1,0 +1,14 @@
+[overlay]
+opacity = 0.97
+width = 490
+height = 820
+refresh_seconds = 15 # 只检查当前选定的白名单会话；不扫描其他聊天。
+allow_fill = false # 本机编译 helper、授予辅助功能并实测后，由用户决定启用。
+allowed_bundle_ids = [] # Codex 从已安装飞书.app的 Info.plist 核实，禁止猜测或通配符。
+native_helper = "native/jev-input-helper"
+fill_delay_seconds = 4 # 点填入并确认后，留出时间让用户点击正确会话的空输入框。
+follow_window = false # 本机验证后启用：只跟随窗口坐标，不识别/切换聊天来源。
+follow_bundle_id = "com.electron.lark" # 部署时必须核实本机 Bundle ID。
+window_helper = "native/jev-window-follow"
+message_annotations = false # 本机消息下方标注；需辅助功能与正式应用前台验收。
+message_anchor_helper = "native/jev-message-anchors"

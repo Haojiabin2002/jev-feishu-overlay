@@ -1,0 +1,121 @@
+{
+  "assembled_date": "2026-09-22",
+  "project": "jev-feishu-overlay",
+  "runtime_dependencies": [
+    "pyobjc-core==12.2.2",
+    "pyobjc-framework-Cocoa==12.2.2",
+    "pyobjc-framework-Quartz==12.2.2",
+    "@openai/codex-sdk==0.155.1"
+  ],
+  "upstream": [
+    {
+      "repository": "open-aiee/jev-chat-JARVIS",
+      "commit": "37753bef127b6cd16983b401a6701033a58c585d",
+      "files": [
+        {
+          "path": "tools/jev/questions.py",
+          "git_blob_sha": "61af19acc627deb6c5d20b01196208a135f3639a"
+        },
+        {
+          "path": "app/src/main/java/com/jev/probe/jev/JevClient.kt",
+          "git_blob_sha": "b7412e3a1e35b092edd78dbf69dad6454cdc3f8c"
+        },
+        {
+          "path": "app/src/main/java/com/jev/probe/jev/JevQuestions.kt",
+          "git_blob_sha": "399eab08ec8849d3dc1a7f93ce7c6ab46743997c"
+        },
+        {
+          "path": "LICENSE",
+          "git_blob_sha": "c377e7e4ed38c85454f475546c48e4d35bda73ca"
+        }
+      ]
+    },
+    {
+      "repository": "larksuite/cli",
+      "search_snapshot_commit": "32d198896816e9416711468c20b14df3dbbc63f3",
+      "files": [
+        {
+          "path": "shortcuts/im/im_chat_messages_list.go",
+          "git_blob_sha": "0fccb4bd6cc8a3e868b2c44b0651d4d825fd0b24"
+        },
+        {
+          "path": "shortcuts/im/helpers.go",
+          "git_blob_sha": "6be602d65c0159416ab8ac09de640b89c354a3f5"
+        },
+        {
+          "path": "shortcuts/im/convert_lib/content_convert.go",
+          "git_blob_sha": "d304a5f7898e8d6690e275ec5f048662f29d7828"
+        },
+        {
+          "path": "shortcuts/common/common.go",
+          "git_blob_sha": "03d6794ee93397ba7e9a7782b38aadc5ae2e69fd"
+        },
+        {
+          "path": "skills/lark-im/references/lark-im-messages-send.md",
+          "git_blob_sha": "a0c3fe87aa99e9e841b9412b30df136d0fad5e16"
+        },
+        {
+          "path": "LICENSE",
+          "git_blob_sha": "2b8bbb5e9c46b1abc3a5ac68ee190baf046ba968"
+        }
+      ]
+    }
+  ],
+  "version": "0.3.1",
+  "inherited_from": "jev-feishu-copilot v0.1.0",
+  "runtime_requirements": [
+    "macOS with existing Python >=3.11",
+    "Existing authorized lark-cli",
+    "Existing Codex CLI login and Node.js"
+  ],
+  "optional_native_helper": "Swift + macOS AppKit/ApplicationServices; built and verified on user Mac",
+  "local_revision": {
+    "version": "0.3.1",
+    "date": "2026-10-08",
+    "scope": "AppKit overlay, source-scoped CLI, TypeSafe Jev + Codex SDK, input isolation and local history"
+  },
+  "native_reuse": {
+    "jev_jarvis": {
+      "repository": "https://github.com/jev-chat/jev-chat-jarvis-mac",
+      "commit": "1ac2d5f169c3be85080765bc91e7e00cec1d128f",
+      "reused_methods": [
+        "_build_panel",
+        "_clear_candidates",
+        "_context_line",
+        "_display_height",
+        "_make_button",
+        "_make_label",
+        "_position_near",
+        "_relayout",
+        "_render",
+        "_render_groups",
+        "_row_controls",
+        "_set_collapsed",
+        "_show",
+        "_slot_active",
+        "_wire_window_controls"
+      ],
+      "adaptation": "UI-only extraction; width 440; 1 group x 3 replies; no global config, credentials, OCR or local model imports",
+      "launcher": "packaging/launcher.c (unchanged)",
+      "ui_adjustments": [
+        "PANEL_W=440",
+        "CAND_TEXT_H=64",
+        "CAND_ROW_H=76",
+        "COLLAPSED_H=108",
+        "_relayout document target supports a scroll view",
+        "_relayout clamps to screen before a single resize and skips unchanged window geometry"
+      ]
+    },
+    "work_with_jev": {
+      "repository": "https://github.com/Adkid-Zephyr/work-with-jev",
+      "commit": "8d2db18ef753cd84e06a75dcaa6fa881b35c5a77",
+      "files": [
+        "lib/core.mjs",
+        "lib/providers/feishu.mjs"
+      ],
+      "adaptation": "original provider retained; project runner supplies existing CLI and raw-message timestamp normalization",
+      "tests": "Feishu-only subset adapted from tests/providers.test.mjs; core.test.mjs executed unchanged"
+    }
+  },
+  "publication_date": "2026-10-08"
+}

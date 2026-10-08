@@ -1,0 +1,12 @@
+[project]
+name = "jev-feishu-overlay"
+version = "0.3.1"
+description = "Mac floating decision panel with Jev and an existing Feishu CLI"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+native = ["pyobjc-framework-Cocoa==12.2.2", "pyobjc-framework-Quartz==12.2.2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "tests_overlay"]

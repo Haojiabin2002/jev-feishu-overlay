@@ -1,0 +1,43 @@
+{
+  "jev_jarvis": {
+    "repository": "https://github.com/jev-chat/jev-chat-jarvis-mac",
+    "commit": "1ac2d5f169c3be85080765bc91e7e00cec1d128f",
+    "reused_methods": [
+      "_build_panel",
+      "_clear_candidates",
+      "_context_line",
+      "_display_height",
+      "_make_button",
+      "_make_label",
+      "_position_near",
+      "_relayout",
+      "_render",
+      "_render_groups",
+      "_row_controls",
+      "_set_collapsed",
+      "_show",
+      "_slot_active",
+      "_wire_window_controls"
+    ],
+    "adaptation": "UI-only extraction; width 440; 1 group x 3 replies; no global config, credentials, OCR or local model imports",
+    "launcher": "packaging/launcher.c (unchanged)",
+    "ui_adjustments": [
+      "PANEL_W=440",
+      "CAND_TEXT_H=64",
+      "CAND_ROW_H=76",
+      "COLLAPSED_H=108",
+      "_relayout document target supports a scroll view",
+      "_relayout clamps to screen before a single resize and skips unchanged window geometry"
+    ]
+  },
+  "work_with_jev": {
+    "repository": "https://github.com/Adkid-Zephyr/work-with-jev",
+    "commit": "8d2db18ef753cd84e06a75dcaa6fa881b35c5a77",
+    "files": [
+      "lib/core.mjs",
+      "lib/providers/feishu.mjs"
+    ],
+    "adaptation": "original provider retained; project runner supplies existing CLI and raw-message timestamp normalization",
+    "tests": "Feishu-only subset adapted from tests/providers.test.mjs; core.test.mjs executed unchanged"
+  }
+}

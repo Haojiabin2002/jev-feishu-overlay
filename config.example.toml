@@ -1,0 +1,57 @@
+# 复制为 config.toml 并 chmod 600。不要把真实配置提交到 Git。
+[feishu]
+cli = "lark-cli"  # launchd 部署前由 Codex 改为已有 CLI 的绝对路径。
+owner_open_id = "" # 由当前 CLI user_info 核实；不是邮箱、手机号或 user_id。
+inbox_chat_id = "" # 悬浮窗版留空；仅旧机器人模式使用。
+allow_bot_send = false # 悬浮窗版保持 false；无需机器人，不发送报告。
+
+[privacy]
+allow_cloud = false # 全局许可；仅授权某个来源时保持false，在该[[sources]]内设置allow_cloud。
+redact = true       # 尽力隐藏常见密钥、邮箱、手机号、证件号；不是完整脱敏保证。
+
+[runtime]
+poll_seconds = 5.0
+max_context_messages = 30
+max_context_chars = 14000
+max_message_chars = 1600
+max_input_chars = 12000
+daily_analysis_limit = 100 # 按 UTC 日界，统计分析尝试次数；不是金额预算。
+per_minute_limit = 6
+max_backlog_seconds = 600 # 离线超过这个窗口的旧指令不会重放。
+cli_timeout = 30.0
+model_timeout = 120.0
+
+[models]
+llm_backend = "codex_sdk" # 使用本机 Codex 登录，不要求 LLM_API_KEY；也保留显式 HTTP 后端。
+# Codex SDK 模式需项目内安装 sdk/package-lock.json 锁定的依赖，并核实本机路径。
+codex_binary = "codex" # 桌面启动前建议改为 command -v codex 所返回的绝对路径。
+node_binary = "node"
+codex_model = "gpt-6-astra" # 需账号支持；可明确选择其他模型，不做自动替换。
+codex_reasoning_effort = "high"
+jev_url = "https://api.typesafe.ai/v1/systemone"
+jev_model = "jev-1.13.0"
+jev_key_env = "JEV_API_KEY"
+# 以下仅供显式选择 HTTP 后端时使用；默认 Codex SDK 不调用这些设置。
+llm_url = "https://openrouter.ai/api/v1/chat/completions"
+llm_model = "deepseek/deepseek-chat-v3.1"
+llm_key_env = "LLM_API_KEY"
+json_mode = true
+minimum_grounding = 0.70 # 初始工程阈值，未经你的数据校准，不是准确率。
+
+# 下面只是模板，默认关闭。首次授权建议只启用一个真实会话。
+[[sources]]
+alias = "协作同事"
+user_id = "ou_REPLACE_WITH_CONFIRMED_OPEN_ID"
+relationship = "工作协作关系"
+context = "仅基于消息事实提供建议，不能代我承诺交付时间。"
+enabled = false
+allow_cloud = false # 仅在用户明确持续授权此来源后启用；不授权其他来源或手动文本。
+
+[[sources]]
+alias = "项目群"
+display_name = "Demo Team" # 可填客户端显示名；与不带空白的本地 alias 分开。
+chat_id = "oc_REPLACE_WITH_CONFIRMED_CHAT_ID"
+relationship = "项目协作群，多位独立发言者"
+context = "优先理解最新问题的对象，不能把所有成员当成同一个人。"
+enabled = false
+allow_cloud = false

@@ -1,0 +1,40 @@
+name: Offline checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Publication boundary
+        run: python scripts/check_public_repo.py
+      - name: Python core regression
+        run: python -m unittest discover -s tests -v
+      - name: Reused provider and SDK protocol
+        run: node --test sdk/*.test.mjs
+
+  native-source:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Parse Python sources
+        run: python -m compileall -q jev_feishu tests tests_native
+      - name: Build and check read-only native matcher
+        run: |
+          bash scripts/build_message_anchors.sh
+          native/jev-message-anchors --self-test
